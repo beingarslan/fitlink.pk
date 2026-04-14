@@ -63,9 +63,81 @@
     animation: gradMove 20s ease-in-out infinite;
   }
 
+  .bg-orbits {
+    position: absolute;
+    inset: -18%;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      conic-gradient(from 130deg at 48% 52%, rgba(220,38,38,0.24), rgba(249,115,22,0.05), rgba(127,29,29,0.2), rgba(220,38,38,0.24)),
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 55%);
+    mix-blend-mode: screen;
+    filter: blur(30px);
+    animation: orbitSpin 24s linear infinite;
+  }
+
+  .bg-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.14;
+    background-image:
+      repeating-linear-gradient(65deg, rgba(255,255,255,0.08) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(-65deg, rgba(220,38,38,0.08) 0 1px, transparent 1px 56px);
+    mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 90%);
+  }
+
+  .bg-dumbbell {
+    position: absolute;
+    left: 50%;
+    top: 53%;
+    width: min(86vw, 1020px);
+    transform: translate(-50%, -50%) rotate(-8deg);
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.62;
+    mix-blend-mode: screen;
+    filter: saturate(1.2) contrast(1.08) drop-shadow(0 18px 66px rgba(0,0,0,0.6));
+    animation: dumbbellDrift 9s ease-in-out infinite;
+  }
+
+  .bg-dumbbell-glow {
+    position: absolute;
+    left: 50%;
+    top: 53%;
+    width: min(88vw, 1080px);
+    height: min(24vw, 280px);
+    transform: translate(-50%, -50%) rotate(-8deg);
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 999px;
+    background:
+      radial-gradient(ellipse at 50% 50%, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0.06) 44%, rgba(255,255,255,0) 72%),
+      linear-gradient(120deg, rgba(255,255,255,0.12), rgba(255,255,255,0));
+    filter: blur(18px);
+    opacity: 0.5;
+    animation: dumbbellGlowPulse 6s ease-in-out infinite;
+  }
+
   @keyframes gradMove {
     0%,100% { background-position: 0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 50%, 30% 70%, center; }
     50% { background-position: 20% 15%, 80% 20%, 85% 70%, 15% 80%, 55% 45%, 40% 60%, center; }
+  }
+
+  @keyframes orbitSpin {
+    from { transform: rotate(0deg) scale(1); }
+    to { transform: rotate(360deg) scale(1.03); }
+  }
+
+  @keyframes dumbbellDrift {
+    0%, 100% { transform: translate(-50%, -50%) rotate(-8deg) scale(1); }
+    50% { transform: translate(-50%, -52%) rotate(-4deg) scale(1.03); }
+  }
+
+  @keyframes dumbbellGlowPulse {
+    0%, 100% { opacity: 0.42; }
+    50% { opacity: 0.62; }
   }
 
   /* Softer center so text pops, darker edges for depth */
@@ -74,7 +146,7 @@
     inset: 0;
     z-index: 1;
     background:
-      radial-gradient(ellipse 70% 65% at 50% 48%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.75) 100%);
+      radial-gradient(ellipse 70% 65% at 50% 48%, rgba(0,0,0,0.24) 0%, rgba(0,0,0,0.64) 100%);
     pointer-events: none;
   }
 
@@ -191,6 +263,89 @@
   .nav-loc .city {
     color: rgba(255,255,255,0.5);
     font-weight: 400;
+  }
+
+  .nav-pill,
+  .nav-center,
+  .nav-loc,
+  .tagline-box,
+  .cta-btn,
+  .foot-credit,
+  .foot-copy {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 42%, rgba(8,8,8,0.5) 100%);
+    backdrop-filter: blur(28px) saturate(145%);
+    -webkit-backdrop-filter: blur(28px) saturate(145%);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.35),
+      inset 0 -1px 0 rgba(255,255,255,0.06),
+      0 10px 34px rgba(0,0,0,0.28);
+  }
+
+  .nav-pill::before,
+  .nav-center::before,
+  .nav-loc::before,
+  .tagline-box::before,
+  .cta-btn::before,
+  .foot-credit::before,
+  .foot-copy::before {
+    content: '';
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 0;
+    height: 45%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4), rgba(255,255,255,0));
+    opacity: 0.42;
+    pointer-events: none;
+  }
+
+  .tool-box {
+    isolation: isolate;
+  }
+
+  .tool-dumbbell {
+    padding-left: 24px;
+    padding-right: 24px;
+    background:
+      radial-gradient(circle at 8% 50%, rgba(220,38,38,0.86) 0 8px, transparent 9px),
+      radial-gradient(circle at 92% 50%, rgba(220,38,38,0.86) 0 8px, transparent 9px),
+      linear-gradient(90deg, transparent 13%, rgba(255,255,255,0.22) 45%, transparent 87%),
+      linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 42%, rgba(8,8,8,0.5) 100%);
+  }
+
+  .tool-plate {
+    background:
+      radial-gradient(circle at 50% 50%, rgba(220,38,38,0.38) 0 13%, transparent 14%),
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.23) 0 5%, transparent 6%),
+      linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 42%, rgba(8,8,8,0.5) 100%);
+  }
+
+  .tool-kettlebell {
+    background:
+      radial-gradient(ellipse 24% 35% at 50% 6%, rgba(255,255,255,0.33) 0 48%, transparent 49%),
+      linear-gradient(180deg, rgba(220,38,38,0.16) 0%, rgba(220,38,38,0) 40%),
+      linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 42%, rgba(8,8,8,0.5) 100%);
+  }
+
+  .tool-rack {
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0 9px, transparent 9px 30px),
+      linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 42%, rgba(8,8,8,0.5) 100%);
+  }
+
+  .tool-bar {
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0 2px, transparent 2px 13px),
+      linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 42%, rgba(8,8,8,0.5) 100%);
+  }
+
+  .tool-plate-sm {
+    background:
+      radial-gradient(circle at 50% 50%, rgba(220,38,38,0.22) 0 12%, transparent 13%),
+      linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.05) 42%, rgba(8,8,8,0.5) 100%);
   }
 
   /* ═══════════════════════════════════════════
@@ -381,10 +536,12 @@
   }
 
   .cta-btn:hover {
-    background: rgba(10,10,10,0.9);
-    border-color: rgba(220,38,38,0.4);
+    background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(220,38,38,0.18) 44%, rgba(8,8,8,0.62) 100%);
+    border-color: rgba(255,255,255,0.35);
     transform: translateY(-2px);
-    box-shadow: 0 10px 36px rgba(0,0,0,0.4);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.46),
+      0 12px 38px rgba(0,0,0,0.42);
   }
 
   .cta-btn svg { width: 15px; height: 15px; opacity: 0.7; flex-shrink: 0; }
@@ -457,7 +614,12 @@
   @media (max-width: 800px) {
     .stage { padding: 8px; }
     .canvas { padding: 18px 16px 16px; min-height: calc(100vh - 16px); border-radius: 18px; }
+    .bg-orbits { inset: -30%; filter: blur(24px); opacity: 0.8; }
+    .bg-lines { opacity: 0.1; }
+    .bg-dumbbell-glow { width: min(138vw, 820px); height: 180px; top: 56%; opacity: 0.46; }
+    .bg-dumbbell { width: min(130vw, 760px); top: 56%; opacity: 0.44; }
     .top-bar { flex-wrap: wrap; gap: 8px; }
+    .tool-dumbbell { padding-left: 16px; padding-right: 16px; }
     .nav-pill, .nav-center, .nav-loc { font-size: 10px; padding: 8px 14px; }
     .nav-center { display: none; }
     .v-label { display: none; }
@@ -490,6 +652,38 @@
   <div class="canvas">
 
     <div class="gradient-bg"></div>
+    <div class="bg-orbits"></div>
+    <div class="bg-lines"></div>
+    <div class="bg-dumbbell-glow"></div>
+    <svg class="bg-dumbbell" viewBox="0 0 1000 320" aria-hidden="true">
+      <defs>
+        <linearGradient id="bgBar" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#f8fafc" stop-opacity="0.95"/>
+          <stop offset="1" stop-color="#cbd5e1" stop-opacity="0.72"/>
+        </linearGradient>
+        <linearGradient id="bgPlate" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#dc2626" stop-opacity="0.95"/>
+          <stop offset="1" stop-color="#7f1d1d" stop-opacity="0.92"/>
+        </linearGradient>
+      </defs>
+
+      <rect x="284" y="148" width="432" height="24" rx="12" fill="url(#bgBar)" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+      <rect x="300" y="154" width="400" height="6" rx="3" fill="rgba(255,255,255,0.35)"/>
+
+      <g>
+        <rect x="78" y="106" width="64" height="108" rx="12" fill="url(#bgPlate)" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+        <rect x="150" y="92" width="82" height="136" rx="14" fill="url(#bgPlate)" opacity="0.98" stroke="rgba(255,255,255,0.24)" stroke-width="1.4"/>
+        <rect x="240" y="82" width="34" height="156" rx="9" fill="#f8fafc" fill-opacity="0.7"/>
+      </g>
+
+      <g>
+        <rect x="858" y="106" width="64" height="108" rx="12" fill="url(#bgPlate)" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+        <rect x="768" y="92" width="82" height="136" rx="14" fill="url(#bgPlate)" opacity="0.98" stroke="rgba(255,255,255,0.24)" stroke-width="1.4"/>
+        <rect x="726" y="82" width="34" height="156" rx="9" fill="#f8fafc" fill-opacity="0.7"/>
+      </g>
+
+      <ellipse cx="500" cy="159" rx="404" ry="104" fill="none" stroke="rgba(255,255,255,0.24)" stroke-width="2.2"/>
+    </svg>
     <div class="vignette"></div>
     <div class="grain"></div>
 
@@ -498,7 +692,7 @@
 
     <!-- ═══ TOP BAR ═══ -->
     <div class="top-bar">
-      <div class="nav-pill">
+      <div class="nav-pill tool-box tool-dumbbell">
         <svg class="logo-mini" viewBox="0 0 200 120">
           <g transform="translate(30, 20)">
             <circle cx="30" cy="40" r="28" fill="none" stroke="#FAFAFA" stroke-width="14" stroke-linecap="round"/>
@@ -508,11 +702,11 @@
         </svg>
         FitLink
       </div>
-      <div class="nav-center">
+      <div class="nav-center tool-box tool-plate">
         <span class="live-dot"></span>
         Something is moving
       </div>
-      <div class="nav-loc">
+      <div class="nav-loc tool-box tool-kettlebell">
         <span class="flag">🇵🇰</span>
         Made for<span class="city">Lahore</span>
       </div>
@@ -593,7 +787,7 @@
 
       <h1 class="brand-title">FITLINK</h1>
 
-      <div class="tagline-box">
+      <div class="tagline-box tool-box tool-rack">
         <p class="tagline">
           Fitness in Pakistan is about to get <span class="accent">reimagined</span>
         </p>
@@ -604,7 +798,7 @@
           Stay close<span class="sep">&#9679;</span>It's almost time
         </div>
 
-        <a class="cta-btn" href="mailto:hello@fitlink.pk">
+        <a class="cta-btn tool-box tool-bar" href="mailto:hello@fitlink.pk">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="4" width="20" height="16" rx="2"/>
             <polyline points="22,6 12,13 2,6"/>
@@ -620,10 +814,10 @@
 
     <!-- ═══ FOOTER ═══ -->
     <div class="foot">
-      <div class="foot-credit">
+      <div class="foot-credit tool-box tool-plate-sm">
         A project by <span class="fn">Arushma</span> <span class="ht">&#10084;</span>
       </div>
-      <div class="foot-copy">&copy; 2026 FitLink &middot; Pakistan</div>
+      <div class="foot-copy tool-box tool-plate-sm">&copy; 2026 FitLink &middot; Pakistan</div>
     </div>
 
   </div>
